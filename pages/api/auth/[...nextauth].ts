@@ -65,5 +65,12 @@ export default NextAuth({
       console.log('EXISTING ACCESS TOKEN EXPIRED :(')
       return await refreshAccessToken(token)
     },
+    async session({ session, token }: any) {
+      session.user.accessToken = token.accessToken
+      session.user.refreshToken = token.refreshToken
+      session.user.username = token.username
+
+      return session
+    },
   },
 })
