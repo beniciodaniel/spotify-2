@@ -1,8 +1,14 @@
+import { signOut, useSession } from 'next-auth/react'
 import { SidebarButton } from './SidebarButton'
 
 function Sidebar() {
+  const { data: session, status } = useSession()
+
+  console.log(session)
+
   return (
     <div className="border-r border-gray-900 p-5 text-sm text-gray-500">
+      <button onClick={() => signOut()}>LOGOUT</button>
       <div className="space-y-4">
         <SidebarButton text="Home" type="HomeIcon" />
         <SidebarButton text="Search" type="SearchIcon" />
