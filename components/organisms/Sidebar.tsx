@@ -1,13 +1,13 @@
 import { signOut, useSession } from 'next-auth/react'
-import { SidebarButton } from './SidebarButton'
+import { SidebarButton } from '../molecules'
 
-function Sidebar() {
+export function Sidebar() {
   const { data: session, status } = useSession()
 
   console.log(session)
 
   return (
-    <div className="border-r border-gray-900 p-5 text-sm text-gray-500">
+    <div className="h-screen overflow-y-scroll border-r border-gray-900 p-5 text-sm text-gray-500 scrollbar-hide">
       <button onClick={() => signOut()}>LOGOUT</button>
       <div className="space-y-4">
         <SidebarButton text="Home" type="HomeIcon" />
@@ -38,9 +38,21 @@ function Sidebar() {
         <p className="cursor-pointer hover:text-white">Playlist name... </p>
         <p className="cursor-pointer hover:text-white">Playlist name... </p>
         <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
+        <p className="cursor-pointer hover:text-white">Playlist name... </p>
       </div>
     </div>
   )
 }
-
-export default Sidebar

@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import Sidebar from '../components/molecules/Sidebar'
+import { Center, Sidebar } from '../components/organisms'
 
 export default function Home() {
   return (
@@ -8,9 +8,9 @@ export default function Home() {
         <title>Spotify 2.0</title>
       </Head>
 
-      <main>
+      <main className="flex">
         <Sidebar />
-        {/* Center */}
+        <Center />
       </main>
 
       <div>{/* Player */}</div>
