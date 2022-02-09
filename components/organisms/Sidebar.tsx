@@ -1,6 +1,8 @@
 import { signOut, useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
+import { useRecoilState } from 'recoil'
 import { useSpotify } from '../../hooks/useSpotify'
+import { playlistIdState } from '../../recoil/atoms/playlistAtom'
 import { SidebarButton } from '../molecules'
 
 export function Sidebar() {
@@ -8,6 +10,7 @@ export function Sidebar() {
   const [playlists, setPlaylists] = useState<
     SpotifyApi.PlaylistObjectSimplified[]
   >([])
+  const [playlistId, setPlaylistId] = useRecoilState(playlistIdState)
   const spotifyApi = useSpotify()
 
   useEffect(() => {
@@ -20,6 +23,7 @@ export function Sidebar() {
 
   console.log(session)
   console.log(playlists)
+  console.log(playlistId)
 
   return (
     <div className="h-screen overflow-y-scroll border-r border-gray-900 p-5 text-sm text-gray-500 scrollbar-hide">
@@ -39,7 +43,11 @@ export function Sidebar() {
 
         {/* Playlist */}
         {playlists.map((playlist) => (
-          <p key={playlist.id} className="cursor-pointer hover:text-white">
+          <p
+            key={playlist.id}
+            onClick={() => setPlaylistId(playlist.id)}
+            className="cursor-pointer hover:text-white"
+          >
             {playlist.name}
           </p>
         ))}
