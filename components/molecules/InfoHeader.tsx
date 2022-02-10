@@ -36,10 +36,6 @@ export function InfoHeader() {
       .catch((err) => console.log('Something went wrong', err))
   }, [spotifyApi, playlistId])
 
-  console.log(color)
-  console.log(playlistId, 'IN INFOHEADER')
-  console.log(playlist, 'IN INFOHEADER')
-
   return (
     <section
       className={`flex h-80 items-end space-x-7 bg-gradient-to-b ${color} to-black p-8 text-white`}
