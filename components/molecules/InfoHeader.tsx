@@ -16,10 +16,10 @@ const colors = [
 ]
 
 export function InfoHeader() {
-  const [color, setColor] = useState('')
-  const playlistId = useRecoilValue(playlistIdState)
-  const [playlist, setPlaylist] = useRecoilState(playlistState)
   const spotifyApi = useSpotify()
+  const [color, setColor] = useState('')
+  const [playlist, setPlaylist] = useRecoilState(playlistState)
+  const playlistId = useRecoilValue(playlistIdState)
 
   useEffect(() => {
     const shuffledColor = shuffle(colors).pop()
