@@ -6,7 +6,12 @@ import {
   isPlayingState,
 } from '../../recoil/atoms/songAtom'
 
-export function Song({ order, track }) {
+interface Props {
+  order: number
+  track: SpotifyApi.TrackObjectFull
+}
+
+export function Song({ order, track }: Props) {
   const spotifyApi = useSpotify()
 
   const [currentTrackId, setCurrentTrackId] =
@@ -14,10 +19,10 @@ export function Song({ order, track }) {
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
 
   const playSong = () => {
-    setCurrentTrackId(track.track.id)
+    setCurrentTrackId(track.id)
     setIsPlaying(true)
     spotifyApi.play({
-      uris: [track.track.uri],
+      uris: [track.uri],
     })
   }
 
@@ -30,17 +35,17 @@ export function Song({ order, track }) {
         <p>{order + 1}</p>
         <img
           className="h-10 w-10"
-          src={track.track.album.images[0].url}
+          src={track.album.images[0].url}
           alt="Album name"
         />
         <div>
-          <p className="w-36 truncate text-white lg:w-64">{track.track.name}</p>
-          <p className="w-40">{track.track.artists[0].name}</p>
+          <p className="w-36 truncate text-white lg:w-64">{track.name}</p>
+          <p className="w-40">{track.artists[0].name}</p>
         </div>
       </div>
       <div className="ml-auto flex items-center justify-between md:ml-0">
-        <p className="hidden w-40 md:inline">{track.track.album.name}</p>
-        <p>{millisToMinutesAndSeconds(track.track.duration_ms)}</p>
+        <p className="hidden w-40 md:inline">{track.album.name}</p>
+        <p>{millisToMinutesAndSeconds(track.duration_ms)}</p>
       </div>
     </div>
   )
