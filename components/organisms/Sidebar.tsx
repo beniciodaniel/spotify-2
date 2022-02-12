@@ -27,7 +27,6 @@ export function Sidebar() {
 
   return (
     <div className="hidden h-screen overflow-y-scroll border-r border-gray-900 p-5 text-xs text-gray-500 scrollbar-hide sm:max-w-[12rem] md:inline-flex lg:max-w-[15rem] lg:text-sm">
-      <button onClick={() => signOut()}>LOGOUT</button>
       <div className="space-y-4">
         <SidebarButton text="Home" type="HomeIcon" />
         <SidebarButton text="Search" type="SearchIcon" />
