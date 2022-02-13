@@ -1,7 +1,7 @@
+import Head from 'next/head'
 import { GetServerSideProps } from 'next'
 import { getSession } from 'next-auth/react'
-import Head from 'next/head'
-import { Center, Sidebar } from '../components/organisms'
+import { Center, Player, Sidebar } from '../components/organisms'
 
 export default function Home() {
   return (
@@ -15,7 +15,9 @@ export default function Home() {
         <Center />
       </main>
 
-      <div>{/* Player */}</div>
+      <div className="sticky bottom-0">
+        <Player />
+      </div>
     </div>
   )
 }

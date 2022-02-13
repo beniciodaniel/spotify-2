@@ -7,7 +7,7 @@ export function Songs() {
 
   return (
     <div className="flex flex-col space-y-1 px-8 pb-28 text-white">
-      {playlist?.tracks.items.map((item, index: number) => (
+      {playlist?.tracks?.items.map((item, index: number) => (
         <Song key={item.track.id} track={item.track} order={index} />
       ))}
     </div>
