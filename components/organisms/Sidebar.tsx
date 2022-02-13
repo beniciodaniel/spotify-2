@@ -1,4 +1,4 @@
-import { signOut, useSession } from 'next-auth/react'
+import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
 import { useSpotify } from '../../hooks/useSpotify'
@@ -20,10 +20,6 @@ export function Sidebar() {
         .then((data) => setPlaylists(data.body.items))
     }
   }, [session, spotifyApi])
-
-  console.log(session)
-  console.log(playlists)
-  console.log(playlistId)
 
   return (
     <div className="hidden h-screen overflow-y-scroll border-r border-gray-900 p-5 pb-36 text-xs text-gray-500 scrollbar-hide sm:max-w-[12rem] md:inline-flex lg:max-w-[15rem] lg:text-sm">
