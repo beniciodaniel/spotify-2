@@ -1,11 +1,3 @@
-import { SwitchHorizontalIcon } from '@heroicons/react/outline'
-import {
-  FastForwardIcon,
-  PauseIcon,
-  PlayIcon,
-  ReplyIcon,
-  RewindIcon,
-} from '@heroicons/react/solid'
 import { useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import { useRecoilState } from 'recoil'
@@ -15,6 +7,7 @@ import {
   currentTrackIdState,
   isPlayingState,
 } from '../../recoil/atoms/songAtom'
+import { PlayerButtons, PlayerSongInfo, Volume } from '../molecules'
 
 export function Player() {
   const { data: session } = useSession()
@@ -22,20 +15,26 @@ export function Player() {
   const [currentTrackId, setCurrentTrackId] =
     useRecoilState(currentTrackIdState)
   const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState)
-  const [volue, setVolume] = useState(50)
+  const [volume, setVolume] = useState(50)
 
   const songInfo = useSongInfo()
 
   const fetchCurrentSong = () => {
     if (Object.keys(songInfo).length === 0) {
-      spotifyApi.getMyCurrentPlayingTrack().then((data) => {
-        console.log('Now playing: ', data.body?.item?.name)
-        setCurrentTrackId(String(data.body?.item?.id))
+      spotifyApi
+        .getMyCurrentPlayingTrack()
+        .then((data) => {
+          console.log('Now playing: ', data.body?.item?.name)
+          setCurrentTrackId(String(data.body?.item?.id))
 
-        spotifyApi.getMyCurrentPlaybackState().then((data) => {
-          setIsPlaying(data.body?.is_playing)
+          spotifyApi
+            .getMyCurrentPlaybackState()
+            .then((data) => {
+              setIsPlaying(data.body?.is_playing)
+            })
+            .catch((error) => console.log(error))
         })
-      })
+        .catch((error) => console.log(error))
     }
   }
 
@@ -45,7 +44,7 @@ export function Player() {
         spotifyApi.pause()
         setIsPlaying(false)
       } else {
-        spotifyApi.play()
+        spotifyApi.play().catch((err) => {})
         setIsPlaying(true)
       }
     })
@@ -60,38 +59,12 @@ export function Player() {
 
   return (
     <div className="grid h-24 grid-cols-3 bg-gradient-to-b from-black to-gray-900 px-2 text-sm text-white md:px-8 md:text-base">
-      {/* Lado esquerdo */}
-      <div className="flex items-center space-x-4">
-        <img
-          className="hidden h-10 w-10 md:inline"
-          src={songInfo?.album?.images?.[0]?.url}
-          alt="Album cover"
-        />
-        <div>
-          <h3>{songInfo?.name}</h3>
-          <p>{songInfo?.artists?.[0]?.name}</p>
-        </div>
-      </div>
+      <PlayerSongInfo songInfo={songInfo} />
 
-      {/* Centro */}
-      <div className="flex items-center justify-evenly">
-        <SwitchHorizontalIcon className="button" />
-        <RewindIcon
-          // onClick={() => spotifyApi.skipToPrevious()}} API IS NOT WORKINg
-          className="button"
-        />
+      <PlayerButtons isPlaying={isPlaying} handlePlayPause={handlePlayPause} />
 
-        {isPlaying ? (
-          <PauseIcon className="button h-10 w-10" onClick={handlePlayPause} />
-        ) : (
-          <PlayIcon className="button h-10 w-10" onClick={handlePlayPause} />
-        )}
-
-        <FastForwardIcon
-          // onClick={() => spotifyApi.skipToNext()}} API IS NOT WORKINg
-          className="button"
-        />
-        <ReplyIcon className="button" />
+      <div className="pr-5">
+        <Volume volume={volume} setVolume={setVolume} />
       </div>
     </div>
   )

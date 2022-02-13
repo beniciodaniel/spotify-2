@@ -14,20 +14,16 @@ export function useSongInfo() {
   useEffect(() => {
     const fetchSongInfo = async () => {
       if (currentTrackId) {
-        try {
-          const trackInfo = await fetch(
-            `https://api.spotify.com/v1/tracks/${currentTrackId}`,
-            {
-              headers: {
-                Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
-              },
-            }
-          ).then((response) => response.json())
+        const trackInfo = await fetch(
+          `https://api.spotify.com/v1/tracks/${currentTrackId}`,
+          {
+            headers: {
+              Authorization: `Bearer ${spotifyApi.getAccessToken()}`,
+            },
+          }
+        ).then((response) => response.json())
 
-          setSongInfo(trackInfo)
-        } catch (error) {
-          console.log(error, 'ERROR in fetchSongInfo')
-        }
+        setSongInfo(trackInfo)
       }
     }
 

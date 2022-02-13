@@ -21,9 +21,14 @@ export function Song({ order, track }: Props) {
   const playSong = () => {
     setCurrentTrackId(track.id)
     setIsPlaying(true)
-    spotifyApi.play({
-      uris: [track.uri],
-    })
+
+    spotifyApi
+      .play({
+        uris: [track.uri],
+      })
+      .catch((err) => {
+        console.log(err, '-> playSong')
+      })
   }
 
   return (

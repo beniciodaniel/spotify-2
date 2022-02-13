@@ -1,5 +1,8 @@
 export { InfoHeader } from './InfoHeader'
+export { PlayerButtons } from './PlayerButtons'
+export { PlayerSongInfo } from './PlayerSongInfo'
 export { SidebarButton } from './SidebarButton'
 export { Song } from './Song'
 export { Songs } from './Songs'
 export { UserMenu } from './UserMenu'
+export { Volume } from './Volume'
