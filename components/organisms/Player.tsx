@@ -55,7 +55,9 @@ export function Player() {
       </div>
 
       {/* Centro */}
-      <div>{/* <SwitchHorizontalIcon className="h-5 w-5" /> */}</div>
+      <div>
+        <SwitchHorizontalIcon className="button" />
+      </div>
     </div>
   )
 }
