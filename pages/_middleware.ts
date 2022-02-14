@@ -1,6 +1,12 @@
 import { getToken } from 'next-auth/jwt'
 import { NextResponse } from 'next/server'
-import type { NextRequest } from 'next/server'
+// import type { NextRequest } from 'next/server'
+import { NextApiRequest } from 'next'
+import { NextURL } from 'next/dist/server/web/next-url'
+
+interface NextRequest extends NextApiRequest {
+  nextUrl: NextURL
+}
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
